@@ -136,7 +136,6 @@ module Rack::Mount
 
       env[PATH_INFO] = Utils.normalize_path(env[PATH_INFO])
 
-      request = nil
       req = @request_class.new(env)
       recognize(req) do |route, matches, params|
         # TODO: We only want to unescape params from uri related methods
@@ -158,7 +157,7 @@ module Rack::Mount
         end
       end
 
-      request || [404, {'Content-Type' => 'text/html', 'X-Cascade' => 'pass'}, ['Not Found']]
+      [404, {'Content-Type' => 'text/html', 'X-Cascade' => 'pass'}, ['Not Found']]
     end
 
     # Generates a url from Rack env and identifiers or significant keys.
